@@ -116,7 +116,18 @@ mark{background:var(--yellowb);padding:0 3px;border-radius:3px}
 footer{max-width:1200px;margin:20px auto 0;padding:32px 20px 70px;color:var(--steel);font-size:12.5px;border-top:1px solid var(--hairline)}
 footer p{margin:5px 0}
 
-@media(max-width:900px){nav.toc{display:none}.wrap{padding:0 14px}header.top h1{font-size:34px}}
+header.top h1,header.top p,.subject-h,.topic>h3{word-break:keep-all}
+@media(max-width:900px){
+  nav.toc{display:none}.wrap{padding:0 14px}
+  header.top{padding:44px 18px 50px}
+  header.top h1{font-size:30px;letter-spacing:-1px}
+  header.top p{font-size:14px}
+  header.top p.fine{font-size:12px}
+  .statline .chip{font-size:11.5px;padding:6px 12px}
+  header.top .eyebrow{font-size:10px;padding:5px 12px}
+  .subject-h{font-size:18px;padding:13px 16px}
+  .body{padding:14px 14px}
+}
 @media print{
   nav.toc,.search{display:none}
   .topic.collapsed>.body{display:block}
