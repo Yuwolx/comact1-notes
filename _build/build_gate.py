@@ -45,7 +45,11 @@ button{width:100%;height:46px;margin-top:12px;border:none;border-radius:10px;bac
 button:hover{background:#4534b3}
 .err{color:#ff8a9c;font-size:13px;margin-top:12px;min-height:16px}
 .hint{margin-top:18px;font-size:12px;color:#7a86a6}
-</style></head>
+html.auto .box{display:none}
+html.auto body::before{content:"여는 중…";color:#7a86a6;font-size:14px}
+</style>
+<script>try{if(localStorage.getItem('cbt_gate_key'))document.documentElement.className='auto';}catch(e){}</script>
+</head>
 <body>
 <div class="box">
   <div class="lock">🔒</div>
@@ -56,7 +60,7 @@ button:hover{background:#4534b3}
     <button type="submit" id="go">입장</button>
     <div class="err" id="err"></div>
   </form>
-  <div class="hint">암호는 기기 종류와 무관하게 동일합니다.</div>
+  <div class="hint">암호는 기기 종류와 무관하게 동일하며, 한 번 입장하면 이 브라우저에서는 다시 묻지 않습니다.</div>
 </div>
 <script id="enc" type="application/json">__PAYLOAD__</script>
 <script>
@@ -69,12 +73,22 @@ button:hover{background:#4534b3}
     var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:d(enc.iv)},key,d(enc.ct));
     return new TextDecoder().decode(pt);
   }
+  (async function(){
+    var saved=null; try{saved=localStorage.getItem('cbt_gate_key');}catch(_){}
+    if(saved){
+      var go=document.getElementById('go');go.textContent='여는 중…';go.disabled=true;
+      try{var html=await unlock(saved);document.open();document.write(html);document.close();return;}
+      catch(_){try{localStorage.removeItem('cbt_gate_key');}catch(__){}document.documentElement.className='';go.textContent='입장';go.disabled=false;}
+    }
+  })();
   document.getElementById('f').addEventListener('submit',async function(e){
     e.preventDefault();
     var err=document.getElementById('err'),go=document.getElementById('go');
     err.textContent='';go.textContent='확인 중…';go.disabled=true;
     try{
-      var html=await unlock(document.getElementById('pw').value);
+      var pw=document.getElementById('pw').value;
+      var html=await unlock(pw);
+      try{localStorage.setItem('cbt_gate_key',pw);}catch(_){}
       document.open();document.write(html);document.close();
     }catch(_){
       err.textContent='암호가 올바르지 않습니다.';go.textContent='입장';go.disabled=false;
