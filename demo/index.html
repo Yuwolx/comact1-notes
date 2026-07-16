@@ -168,7 +168,7 @@ header.top h1,header.top p,.subject-h,.topic>h3{word-break:keep-all}
 .cbt-subhead{font-size:13px;font-weight:700;color:var(--primary);margin:20px 0 8px}
 .qcard{border:1px solid var(--hairline);border-radius:10px;padding:15px 18px;margin:10px 0}
 .qcard .qnum{font-size:11.5px;font-weight:700;color:var(--stone);margin-bottom:6px}
-.qcard .qtext{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.5;white-space:pre-line}
+.qcard .qtext{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.5;white-space:pre-wrap}
 .qcard .xls,.qcard .dbt{border-collapse:collapse;width:auto;margin:2px 0 14px;font-size:13px}
 .qcard .xls td,.qcard .xls th,.qcard .dbt td,.qcard .dbt th{border:1px solid #c8c4be;padding:4px 10px;text-align:center;min-width:32px}
 .qcard .xls thead th,.qcard .xls .rownum{background:#f0eeec;color:#5d5b54;font-weight:600}
@@ -491,11 +491,14 @@ q.addEventListener('input',function(){
 </script>
 <script>
 (function(){
-  var RAW = {"questions": [{"subject": 1, "q": "다음 중 자료의 구성 단위를 작은 것에서 큰 것 순으로 바르게 나열한 것은?", "options": ["비트 → 니블 → 바이트 → 워드 → 필드", "비트 → 바이트 → 니블 → 워드 → 필드", "니블 → 비트 → 바이트 → 필드 → 워드", "비트 → 니블 → 워드 → 바이트 → 필드"], "answer": 0, "explain": "자료의 구성 단위는 작은 것부터 비트 → 니블(4비트) → 바이트(8비트) → 워드 → 필드 → 레코드 → 파일 → 데이터베이스 순이다. 니블은 4개의 비트가 모인 단위이므로 바이트보다 앞에 오고, 필드는 파일 구성의 최소 단위로 워드보다 뒤에 온다."}, {"subject": 1, "q": "다음 중 문자 코드 체계에 대한 설명으로 옳지 않은 것은?", "options": ["ASCII는 7비트로 128문자를 표현하며 데이터 통신·PC용으로 사용된다", "EBCDIC는 8비트로 256문자를 표현하며 대형 컴퓨터용이다", "Unicode는 세계 각국 언어를 4바이트로 표현하는 국제 표준이다", "BCD는 6비트로 64문자를 표현하며 영문 소문자 표현이 불가하다"], "answer": 2, "explain": "유니코드는 세계 각국의 언어를 2바이트(16비트)로 표현하는 국제 표준 코드이므로 4바이트로 표현한다는 설명은 옳지 않다. ASCII는 7비트 128문자의 데이터 통신·PC용 코드, EBCDIC는 8비트 256문자의 대형 컴퓨터용 코드, BCD는 6비트 64문자 코드로 영문 소문자를 표현할 수 없다는 설명은 모두 옳다."}, {"subject": 1, "q": "다음 중 실수형 데이터에 대한 설명으로 옳은 것은?", "options": ["정수형보다 표현 범위가 작다", "부호부, 지수부, 가수부로 구성된다", "정수형보다 연산 속도가 빠르다", "부호부와 가수부만으로 구성된다"], "answer": 1, "explain": "실수형 데이터는 부호부·지수부·가수부로 구성된다. 실수형은 정수형보다 표현 범위가 크지만 연산 속도는 느리므로 표현 범위가 작다거나 연산 속도가 빠르다는 설명은 틀렸고, 부호부와 가수부만으로 구성된다는 설명도 지수부가 빠져 있어 옳지 않다."}, {"subject": 1, "q": "다음 중 레지스터에 대한 설명으로 옳지 않은 것은?", "options": ["프로그램 카운터(PC)는 다음에 실행할 명령의 내용을 기억한다", "명령 레지스터(IR)는 현재 실행 중인 명령을 기억한다", "프로그램 카운터(PC)는 다음에 실행할 명령의 주소를 기억한다", "누산기(ACC)는 연산 결과를 일시 저장한다"], "answer": 0, "explain": "프로그램 카운터(PC)는 다음에 실행할 명령의 '주소'를 기억하는 레지스터이므로 명령의 '내용'을 기억한다는 설명은 옳지 않다. 명령 레지스터(IR)는 현재 실행 중인 명령을 기억하고, 누산기(ACC)는 연산 결과를 일시적으로 저장한다."}, {"subject": 2, "q": "다음 중 Excel의 데이터 입력 시 정렬에 대한 설명으로 옳지 않은 것은?", "options": ["숫자 앞에 작은따옴표(')를 붙여도 오른쪽에 정렬된다", "숫자는 셀의 오른쪽에 정렬된다", "날짜와 시간은 셀의 오른쪽에 정렬된다", "문자는 셀의 왼쪽에 정렬된다"], "answer": 0, "explain": "숫자 앞에 작은따옴표(')를 붙이면 문자 데이터로 취급되어 셀의 왼쪽에 정렬되므로, 작은따옴표를 붙여도 오른쪽에 정렬된다는 설명은 틀렸다. 숫자는 오른쪽, 날짜와 시간도 내부적으로 숫자이므로 오른쪽, 문자는 왼쪽에 정렬된다는 나머지 설명은 모두 옳다."}, {"subject": 2, "q": "다음 중 채우기 핸들에 대한 설명으로 옳지 않은 것은?", "options": ["숫자와 문자가 혼합된 데이터는 문자만 증가한다", "문자 데이터는 그대로 복사된다", "숫자 데이터는 기본적으로 복사되며 [Ctrl]+드래그 시 1씩 증가한다", "날짜 데이터는 1일씩 증가한다"], "answer": 0, "explain": "숫자와 문자가 혼합된 데이터를 채우기 핸들로 드래그하면 문자는 그대로 유지되고 숫자 부분만 1씩 증가하므로, 문자만 증가한다는 설명은 틀렸다. 문자 데이터는 그대로 복사되고, 숫자는 기본적으로 복사되며 [Ctrl]+드래그 시 1씩 증가하고, 날짜는 1일씩 증가한다는 설명은 모두 옳다."}, {"subject": 2, "q": "다음 중 여러 셀에 동일한 데이터를 한 번에 입력하는 방법으로 옳은 것은?", "options": ["범위 지정 후 데이터 입력 → [Alt]+[Enter]", "범위 지정 후 데이터 입력 → [Shift]+[Enter]", "범위 지정 후 데이터 입력 → [Ctrl]+[Enter]", "범위 지정 후 데이터 입력 → [Enter]"], "answer": 2, "explain": "범위를 지정한 상태에서 데이터를 입력하고 [Ctrl]+[Enter]를 누르면 선택된 모든 셀에 동일한 데이터가 한 번에 입력된다. [Alt]+[Enter]는 한 셀 안에서 줄을 바꾸는 키이고, [Enter]와 [Shift]+[Enter]는 셀 포인터를 아래·위로 이동시킬 뿐 여러 셀에 입력하지 못한다."}, {"subject": 2, "q": "아래 워크시트에서 =SUM(A1:A4)의 결과로 옳은 것은?", "options": ["35", "40", "60", "50"], "answer": 3, "explain": "SUM(A1:A4)는 A열의 5, 10, 15, 20을 더하는 수식이므로 5+10+15+20=50이다. B열의 값(3, 7, 2, 8)은 참조 범위에 포함되지 않으므로 계산에 들어가지 않는다.", "grid": [["5", "3"], ["10", "7"], ["15", "2"], ["20", "8"]]}, {"subject": 3, "q": "다음 중 데이터베이스의 목적으로 보기 어려운 것은?", "options": ["데이터 중복의 최소화", "데이터의 공유와 독립성 확보", "데이터의 무결성과 일관성 유지", "데이터의 일괄 처리"], "answer": 3, "explain": "일괄 처리는 데이터를 모아 두었다가 한꺼번에 처리하는 방식으로 데이터베이스의 목적이 아니며, 데이터베이스는 실시간 접근 처리를 지향한다. 데이터 중복의 최소화, 데이터의 공유와 독립성 확보, 무결성과 일관성 유지는 모두 데이터베이스를 사용하는 대표적인 목적에 해당한다."}, {"subject": 3, "q": "다음 중 스키마의 3계층에 해당하지 않는 것은?", "options": ["논리 스키마", "외부 스키마", "개념 스키마", "내부 스키마"], "answer": 0, "explain": "스키마의 3계층은 외부·개념·내부 스키마이며 논리 스키마는 3계층의 명칭에 해당하지 않는다. 외부 스키마는 사용자나 응용 프로그래머 관점의 논리 구조, 개념 스키마는 데이터베이스 전체의 논리 구조, 내부 스키마는 물리적 저장 구조를 정의한다."}, {"subject": 3, "q": "다음 중 릴레이션의 특성으로 옳지 않은 것은?", "options": ["모든 튜플은 서로 상이하다", "튜플 사이에는 순서가 없다", "한 속성의 값으로 여러 개의 원자값을 가질 수 있다", "속성 사이에는 순서가 없다"], "answer": 2, "explain": "릴레이션에서 속성 값은 더 이상 분해할 수 없는 원자값이어야 하므로 한 속성이 여러 개의 원자값을 가질 수 있다는 설명은 옳지 않다. 모든 튜플은 서로 상이해야 하고, 튜플 사이와 속성 사이에는 순서가 없다는 것은 릴레이션의 올바른 특성이다."}, {"subject": 3, "q": "아래 사원 테이블에서 SELECT COUNT(*) FROM 사원; 의 결과로 옳은 것은?", "options": ["2", "3", "Null", "4"], "answer": 3, "explain": "COUNT(*)는 필드 값의 Null 여부와 관계없이 테이블의 전체 레코드 수를 센다. 사원 테이블에는 급여가 Null인 행 2개를 포함하여 모두 4개의 레코드가 있으므로 결과는 4이다. Null인 행이 제외되어 2가 되는 것은 COUNT(급여)를 실행했을 때의 결과이다.", "table": {"header": ["사번", "이름", "급여"], "rows": [["1", "김", "300"], ["2", "이", "Null"], ["3", "박", "250"], ["4", "최", "Null"]]}}]};
+  var RAW = {"questions": [{"subject": 1, "q": "다음 중 자료의 구성 단위를 작은 것에서 큰 것 순으로 바르게 나열한 것은?", "options": ["비트 → 니블 → 바이트 → 워드 → 필드", "비트 → 바이트 → 니블 → 워드 → 필드", "니블 → 비트 → 바이트 → 필드 → 워드", "비트 → 니블 → 워드 → 바이트 → 필드"], "answer": 0, "explain": "자료의 구성 단위는 작은 것부터 비트 → 니블(4비트) → 바이트(8비트) → 워드 → 필드 → 레코드 → 파일 → 데이터베이스 순이다. 니블은 4개의 비트가 모인 단위이므로 바이트보다 앞에 오고, 필드는 파일 구성의 최소 단위로 워드보다 뒤에 온다."}, {"subject": 1, "q": "다음 중 문자 코드 체계에 대한 설명으로 옳지 않은 것은?", "options": ["ASCII는 7비트로 128문자를 표현하며 데이터 통신·PC용으로 사용된다", "EBCDIC는 8비트로 256문자를 표현하며 대형 컴퓨터용이다", "Unicode는 세계 각국 언어를 4바이트로 표현하는 국제 표준이다", "BCD는 6비트로 64문자를 표현하며 영문 소문자 표현이 불가하다"], "answer": 2, "explain": "유니코드는 세계 각국의 언어를 2바이트(16비트)로 표현하는 국제 표준 코드이므로 4바이트로 표현한다는 설명은 옳지 않다. ASCII는 7비트 128문자의 데이터 통신·PC용 코드, EBCDIC는 8비트 256문자의 대형 컴퓨터용 코드, BCD는 6비트 64문자 코드로 영문 소문자를 표현할 수 없다는 설명은 모두 옳다."}, {"subject": 1, "q": "다음 중 실수형 데이터에 대한 설명으로 옳은 것은?", "options": ["정수형보다 표현 범위가 작다", "부호부, 지수부, 가수부로 구성된다", "정수형보다 연산 속도가 빠르다", "부호부와 가수부만으로 구성된다"], "answer": 1, "explain": "실수형 데이터는 부호부·지수부·가수부로 구성된다. 실수형은 정수형보다 표현 범위가 크지만 연산 속도는 느리므로 표현 범위가 작다거나 연산 속도가 빠르다는 설명은 틀렸고, 부호부와 가수부만으로 구성된다는 설명도 지수부가 빠져 있어 옳지 않다."}, {"subject": 1, "q": "다음 중 레지스터에 대한 설명으로 옳지 않은 것은?", "options": ["프로그램 카운터(PC)는 다음에 실행할 명령의 내용을 기억한다", "명령 레지스터(IR)는 현재 실행 중인 명령을 기억한다", "프로그램 카운터(PC)는 다음에 실행할 명령의 주소를 기억한다", "누산기(ACC)는 연산 결과를 일시 저장한다"], "answer": 0, "explain": "프로그램 카운터(PC)는 다음에 실행할 명령의 '주소'를 기억하는 레지스터이므로 명령의 '내용'을 기억한다는 설명은 옳지 않다. 명령 레지스터(IR)는 현재 실행 중인 명령을 기억하고, 누산기(ACC)는 연산 결과를 일시적으로 저장한다."}, {"subject": 2, "q": "다음 중 Excel의 데이터 입력 시 정렬에 대한 설명으로 옳지 않은 것은?", "options": ["숫자 앞에 작은따옴표(')를 붙여도 오른쪽에 정렬된다", "숫자는 셀의 오른쪽에 정렬된다", "날짜와 시간은 셀의 오른쪽에 정렬된다", "문자는 셀의 왼쪽에 정렬된다"], "answer": 0, "explain": "숫자 앞에 작은따옴표(')를 붙이면 문자 데이터로 취급되어 셀의 왼쪽에 정렬되므로, 작은따옴표를 붙여도 오른쪽에 정렬된다는 설명은 틀렸다. 숫자는 오른쪽, 날짜와 시간도 내부적으로 숫자이므로 오른쪽, 문자는 왼쪽에 정렬된다는 나머지 설명은 모두 옳다."}, {"subject": 2, "q": "다음 중 채우기 핸들에 대한 설명으로 옳지 않은 것은?", "options": ["숫자와 문자가 혼합된 데이터는 문자만 증가한다", "문자 데이터는 그대로 복사된다", "숫자 데이터는 기본적으로 복사되며 [Ctrl]+드래그 시 1씩 증가한다", "날짜 데이터는 1일씩 증가한다"], "answer": 0, "explain": "숫자와 문자가 혼합된 데이터를 채우기 핸들로 드래그하면 문자는 그대로 유지되고 숫자 부분만 1씩 증가하므로, 문자만 증가한다는 설명은 틀렸다. 문자 데이터는 그대로 복사되고, 숫자는 기본적으로 복사되며 [Ctrl]+드래그 시 1씩 증가하고, 날짜는 1일씩 증가한다는 설명은 모두 옳다."}, {"subject": 2, "q": "다음 중 여러 셀에 동일한 데이터를 한 번에 입력하는 방법으로 옳은 것은?", "options": ["범위 지정 후 데이터 입력 → [Alt]+[Enter]", "범위 지정 후 데이터 입력 → [Shift]+[Enter]", "범위 지정 후 데이터 입력 → [Ctrl]+[Enter]", "범위 지정 후 데이터 입력 → [Enter]"], "answer": 2, "explain": "범위를 지정한 상태에서 데이터를 입력하고 [Ctrl]+[Enter]를 누르면 선택된 모든 셀에 동일한 데이터가 한 번에 입력된다. [Alt]+[Enter]는 한 셀 안에서 줄을 바꾸는 키이고, [Enter]와 [Shift]+[Enter]는 셀 포인터를 아래·위로 이동시킬 뿐 여러 셀에 입력하지 못한다."}, {"subject": 2, "q": "아래 워크시트에서 =MEDIAN(A1:A5)의 결과로 옳은 것은?", "options": ["41", "20", "100", "30"], "answer": 3, "explain": "MEDIAN은 값을 크기순으로 나열했을 때 가운데에 오는 중앙값을 구한다. 15, 20, 30, 40, 100을 나열하면 세 번째 값인 30이 중앙값이다. 41은 다섯 값의 평균(AVERAGE)으로, 100처럼 극단적으로 큰 값이 있으면 평균과 중앙값이 크게 달라진다.", "grid": [["15"], ["20"], ["30"], ["40"], ["100"]]}, {"subject": 3, "q": "다음 중 데이터베이스의 목적으로 보기 어려운 것은?", "options": ["데이터 중복의 최소화", "데이터의 공유와 독립성 확보", "데이터의 무결성과 일관성 유지", "데이터의 일괄 처리"], "answer": 3, "explain": "일괄 처리는 데이터를 모아 두었다가 한꺼번에 처리하는 방식으로 데이터베이스의 목적이 아니며, 데이터베이스는 실시간 접근 처리를 지향한다. 데이터 중복의 최소화, 데이터의 공유와 독립성 확보, 무결성과 일관성 유지는 모두 데이터베이스를 사용하는 대표적인 목적에 해당한다."}, {"subject": 3, "q": "다음 중 스키마의 3계층에 해당하지 않는 것은?", "options": ["논리 스키마", "외부 스키마", "개념 스키마", "내부 스키마"], "answer": 0, "explain": "스키마의 3계층은 외부·개념·내부 스키마이며 논리 스키마는 3계층의 명칭에 해당하지 않는다. 외부 스키마는 사용자나 응용 프로그래머 관점의 논리 구조, 개념 스키마는 데이터베이스 전체의 논리 구조, 내부 스키마는 물리적 저장 구조를 정의한다."}, {"subject": 3, "q": "다음 중 릴레이션의 특성으로 옳지 않은 것은?", "options": ["모든 튜플은 서로 상이하다", "튜플 사이에는 순서가 없다", "한 속성의 값으로 여러 개의 원자값을 가질 수 있다", "속성 사이에는 순서가 없다"], "answer": 2, "explain": "릴레이션에서 속성 값은 더 이상 분해할 수 없는 원자값이어야 하므로 한 속성이 여러 개의 원자값을 가질 수 있다는 설명은 옳지 않다. 모든 튜플은 서로 상이해야 하고, 튜플 사이와 속성 사이에는 순서가 없다는 것은 릴레이션의 올바른 특성이다."}, {"subject": 3, "q": "아래 사원 테이블에서 SELECT COUNT(*) FROM 사원; 의 결과로 옳은 것은?", "options": ["2", "3", "Null", "4"], "answer": 3, "explain": "COUNT(*)는 필드 값의 Null 여부와 관계없이 테이블의 전체 레코드 수를 센다. 사원 테이블에는 급여가 Null인 행 2개를 포함하여 모두 4개의 레코드가 있으므로 결과는 4이다. Null인 행이 제외되어 2가 되는 것은 COUNT(급여)를 실행했을 때의 결과이다.", "table": {"header": ["사번", "이름", "급여"], "rows": [["1", "김", "300"], ["2", "이", "Null"], ["3", "박", "250"], ["4", "최", "Null"]]}}]};
   var QBANK = (RAW && RAW.questions) ? RAW.questions : [];
   var SUBJ = {1:'제1과목 · 컴퓨터 일반',2:'제2과목 · 스프레드시트 일반',3:'제3과목 · 데이터베이스 일반'};
-  var HKEY='cbt_history_v1', PKEY='cbt_progress_v1', SKEY='cbt_seen_v1';
-  QBANK.forEach(function(q,i){q._id=i;});
+  var HKEY='cbt_history_demo', PKEY='cbt_progress_demo', SKEY='cbt_seen_demo';
+  // 안정 문항 키: 배열 위치가 아닌 내용 해시 — 문항 추가·삭제·재배치에도 '본 문제' 기록이 유지된다
+  function qid(q){var s=q.subject+'|'+q.q,h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0;}return 'q'+(h>>>0).toString(36);}
+  var BYID={};
+  QBANK.forEach(function(q){q._id=qid(q);BYID[q._id]=q;});
   var perSubject=20, useTimer=1, mode='fresh', exam=null, tId=null, remain=0;
   function $(id){return document.getElementById(id);}
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -520,7 +523,7 @@ q.addEventListener('input',function(){
   function buildExam(){var seen=loadSeen();var qs=[];[1,2,3].forEach(function(s){
     var pool=QBANK.filter(function(q){return q.subject===s;});var pick;
     if(mode==='fresh'){var unseen=pool.filter(function(q){return seen.indexOf(q._id)<0;});
-      if(unseen.length<Math.min(perSubject,pool.length)){seen=seen.filter(function(id){return QBANK[id].subject!==s;});unseen=pool.slice();}
+      if(unseen.length<Math.min(perSubject,pool.length)){seen=seen.filter(function(id){var t=BYID[id];return t&&t.subject!==s;});unseen=pool.slice();}
       var rest=pool.filter(function(q){return unseen.indexOf(q)<0;});
       pick=shuffle(unseen).concat(shuffle(rest)).slice(0,perSubject);
     }else{pick=shuffle(pool).slice(0,perSubject);}
@@ -535,7 +538,7 @@ q.addEventListener('input',function(){
     if(useTimer){remain=exam.qs.length*60;tick();tId=setInterval(tick,1000);} else {$('cbtTimer').textContent='시간 무제한';}
     saveProg();
   }
-  function tick(){if(remain<0){clearInterval(tId);grade(true);return;}var t=$('cbtTimer');t.textContent=fmt(remain);t.classList.toggle('warn',remain<=60);remain--;saveProg();}
+  function tick(){if(exam&&exam.done){if(tId)clearInterval(tId);return;}if(remain<0){clearInterval(tId);grade(true);return;}var t=$('cbtTimer');t.textContent=fmt(remain);t.classList.toggle('warn',remain<=60);remain--;saveProg();}
   function renderExam(){
     var h='<div class="cbt-body">',lastSub=0;
     exam.qs.forEach(function(q,i){
@@ -549,12 +552,12 @@ q.addEventListener('input',function(){
     $('cbtTitle').textContent='모의고사 · 총 '+exam.qs.length+'문항';
     $('btnSubmit').addEventListener('click',function(){grade(false);});
     $('btnCancel').addEventListener('click',function(){if(confirm('시험을 그만두시겠습니까? 이 회차는 기록되지 않습니다.'))close();});
-    $('cbtContent').addEventListener('change',function(e){if(e.target.name&&e.target.name.charAt(0)==='q'){var card=e.target.closest('.qcard');Array.prototype.forEach.call(card.querySelectorAll('.opt'),function(o){o.classList.remove('sel');});e.target.closest('.opt').classList.add('sel');updateProg();saveProg();}});
   }
+  var cbc=$('cbtContent');if(cbc)cbc.addEventListener('change',function(e){if(e.target.name&&e.target.name.charAt(0)==='q'){var card=e.target.closest('.qcard');Array.prototype.forEach.call(card.querySelectorAll('.opt'),function(o){o.classList.remove('sel');});e.target.closest('.opt').classList.add('sel');updateProg();saveProg();}});
   function updateProg(){var ans=0;exam.qs.forEach(function(q,i){if(document.querySelector('input[name=q'+i+']:checked'))ans++;});var p=$('cbtProg');if(p)p.textContent=ans+' / '+exam.qs.length+' 응답';}
   function grade(timeUp){
     if(!exam||exam.done)return;exam.done=true;if(tId)clearInterval(tId);clearProg();
-    if(mode==='fresh'){var sn=loadSeen();exam.qs.forEach(function(q){if(sn.indexOf(q._id)<0)sn.push(q._id);});saveSeen(sn);}
+    if(mode==='fresh'){var sn=loadSeen();exam.qs.forEach(function(q){if(BYID[q._id]&&sn.indexOf(q._id)<0)sn.push(q._id);});saveSeen(sn);}
     var per={1:{c:0,t:0},2:{c:0,t:0},3:{c:0,t:0}};
     exam.qs.forEach(function(q,i){
       var sel=document.querySelector('input[name=q'+i+']:checked');var val=sel?parseInt(sel.value,10):-1;exam.answers[i]=val;
@@ -580,19 +583,19 @@ q.addEventListener('input',function(){
     saveHist({date:new Date().toLocaleString('ko-KR'),avg:avg,pass:pass,pcts:pcts,total:totalC,totalT:totalT});
   }
   function close(){if(tId)clearInterval(tId);clearProg();$('cbtOverlay').classList.remove('show');document.body.style.overflow='';}
-  function loadSeen(){try{return JSON.parse(localStorage.getItem(SKEY)||'[]');}catch(e){return [];}}
+  function loadSeen(){try{var a=JSON.parse(localStorage.getItem(SKEY)||'[]');if(!Array.isArray(a))return [];return a.filter(function(id){return !!BYID[id];});}catch(e){return [];}}
   function saveSeen(a){try{localStorage.setItem(SKEY,JSON.stringify(a));}catch(e){}}
   function collectAnswers(){return exam.qs.map(function(q,i){var s=document.querySelector('input[name=q'+i+']:checked');return s?parseInt(s.value,10):-1;});}
-  function saveProg(){if(!exam||exam.done)return;try{localStorage.setItem(PKEY,JSON.stringify({qs:exam.qs,answers:collectAnswers(),remain:remain,useTimer:useTimer}));}catch(e){}}
+  function saveProg(){if(!exam||exam.done)return;try{localStorage.setItem(PKEY,JSON.stringify({qs:exam.qs,answers:collectAnswers(),remain:remain,useTimer:useTimer,mode:mode}));}catch(e){}}
   function loadProg(){try{return JSON.parse(localStorage.getItem(PKEY)||'null');}catch(e){return null;}}
   function clearProg(){try{localStorage.removeItem(PKEY);}catch(e){}}
   function restoreProg(){var p=loadProg();if(!p||!p.qs||!p.qs.length)return;
-    exam={qs:p.qs,answers:[],done:false};useTimer=p.useTimer;
+    exam={qs:p.qs,answers:[],done:false};useTimer=p.useTimer;if(p.mode)mode=p.mode;
     renderExam();
     (p.answers||[]).forEach(function(a,i){if(a>=0){var inp=document.querySelector('input[name=q'+i+'][value="'+a+'"]');if(inp){inp.checked=true;var op=inp.closest('.opt');if(op)op.classList.add('sel');}}});
     updateProg();
     $('cbtOverlay').classList.add('show');document.body.style.overflow='hidden';$('cbtOverlay').scrollTop=0;
-    if(useTimer){remain=p.remain;tick();tId=setInterval(tick,1000);}else{$('cbtTimer').textContent='시간 무제한';}
+    if(useTimer){remain=Math.max(0,p.remain|0);tId=setInterval(tick,1000);tick();}else{$('cbtTimer').textContent='시간 무제한';}
   }
   function loadHist(){try{return JSON.parse(localStorage.getItem(HKEY)||'[]');}catch(e){return [];}}
   function saveHist(rec){var a=loadHist();a.unshift(rec);a=a.slice(0,50);try{localStorage.setItem(HKEY,JSON.stringify(a));}catch(e){}renderHist();}
@@ -600,7 +603,7 @@ q.addEventListener('input',function(){
     var a=loadHist();var el=$('cbtHist');if(!el)return;
     if(a.length===0){el.innerHTML='<div class="empty">아직 응시 이력이 없습니다. 시험을 보면 여기에 기록됩니다.</div>';return;}
     var h='<div class="tscroll"><table><thead><tr><th>일시</th><th>1과목</th><th>2과목</th><th>3과목</th><th>평균</th><th>결과</th></tr></thead><tbody>';
-    a.forEach(function(r){h+='<tr><td>'+esc(r.date)+'</td><td>'+(r.pcts[1]!==undefined?r.pcts[1]:'-')+'</td><td>'+(r.pcts[2]!==undefined?r.pcts[2]:'-')+'</td><td>'+(r.pcts[3]!==undefined?r.pcts[3]:'-')+'</td><td><b>'+r.avg+'</b></td><td>'+(r.pass?'<span class="o">합격</span>':'<span class="x">불합격</span>')+'</td></tr>';});
+    a.forEach(function(r){if(!r||!r.pcts)return;h+='<tr><td>'+esc(r.date)+'</td><td>'+(r.pcts[1]!==undefined?esc(r.pcts[1]):'-')+'</td><td>'+(r.pcts[2]!==undefined?esc(r.pcts[2]):'-')+'</td><td>'+(r.pcts[3]!==undefined?esc(r.pcts[3]):'-')+'</td><td><b>'+esc(r.avg)+'</b></td><td>'+(r.pass?'<span class="o">합격</span>':'<span class="x">불합격</span>')+'</td></tr>';});
     h+='</tbody></table></div>';el.innerHTML=h;
   }
   var bs=$('btnStart');if(bs)bs.addEventListener('click',start);

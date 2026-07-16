@@ -48,7 +48,7 @@ button:hover{background:#4534b3}
 html.auto .box{display:none}
 html.auto body::before{content:"여는 중…";color:#7a86a6;font-size:14px}
 </style>
-<script>try{if(localStorage.getItem('cbt_gate_key'))document.documentElement.className='auto';}catch(e){}</script>
+<script>try{if(localStorage.getItem('cbt_gate_k2')||localStorage.getItem('cbt_gate_key')){document.documentElement.className='auto';setTimeout(function(){document.documentElement.className='';},8000);}}catch(e){}</script>
 </head>
 <body>
 <div class="box">
@@ -64,34 +64,69 @@ html.auto body::before{content:"여는 중…";color:#7a86a6;font-size:14px}
 </div>
 <script id="enc" type="application/json">__PAYLOAD__</script>
 <script>
+// ES5 호환 감시자: 아래 본 스크립트(async 문법)가 구형 브라우저에서 파싱조차 안 될 때 안내를 띄운다
 (function(){
+  window.__gateReady=false;
+  window.addEventListener('load',function(){setTimeout(function(){
+    if(!window.__gateReady){
+      var e=document.getElementById('err');
+      if(e)e.textContent='이 브라우저에서는 열 수 없습니다. 최신 브라우저(크롬·엣지·사파리)로 접속해 주세요.';
+      document.documentElement.className='';
+    }
+  },100);});
+})();
+</script>
+<script>
+(function(){
+  window.__gateReady=true;
   var enc=JSON.parse(document.getElementById('enc').textContent);
+  var err=document.getElementById('err'),go=document.getElementById('go');
+  var K2='cbt_gate_k2',K1='cbt_gate_key'; // K2: PBKDF2 파생키(base64) — 암호 원문은 저장하지 않는다. K1: 구버전 평문 키(발견 시 즉시 이전·삭제)
   var d=function(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0);});};
-  async function unlock(pw){
-    var km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
-    var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:d(enc.salt),iterations:enc.iters,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  var b64=function(buf){var u=new Uint8Array(buf),s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s);};
+  if(!(window.crypto&&crypto.subtle)){
+    err.textContent='보안 모듈을 사용할 수 없습니다. https:// 주소로, 최신 브라우저에서 접속해 주세요.';
+    go.disabled=true;document.documentElement.className='';return;
+  }
+  function isBadKey(e){return !!(e&&(e.name==='OperationError'||e.name==='InvalidCharacterError'||e.name==='DataError'));}
+  async function deriveBits(pw){
+    var km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']);
+    return await crypto.subtle.deriveBits({name:'PBKDF2',salt:d(enc.salt),iterations:enc.iters,hash:'SHA-256'},km,256);
+  }
+  async function openWithBits(bits){
+    var key=await crypto.subtle.importKey('raw',bits,{name:'AES-GCM'},false,['decrypt']);
     var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:d(enc.iv)},key,d(enc.ct));
     return new TextDecoder().decode(pt);
   }
+  function remember(bits){try{localStorage.setItem(K2,b64(bits));localStorage.removeItem(K1);}catch(_){}}
+  function forget(){try{localStorage.removeItem(K2);localStorage.removeItem(K1);}catch(_){}}
+  function show(html){document.open();document.write(html);document.close();}
   (async function(){
-    var saved=null; try{saved=localStorage.getItem('cbt_gate_key');}catch(_){}
-    if(saved){
-      var go=document.getElementById('go');go.textContent='여는 중…';go.disabled=true;
-      try{var html=await unlock(saved);document.open();document.write(html);document.close();return;}
-      catch(_){try{localStorage.removeItem('cbt_gate_key');}catch(__){}document.documentElement.className='';go.textContent='입장';go.disabled=false;}
+    var b2=null,p1=null;
+    try{b2=localStorage.getItem(K2);p1=localStorage.getItem(K1);}catch(_){}
+    if(!b2&&!p1)return;
+    go.textContent='여는 중…';go.disabled=true;
+    try{
+      var bits=b2?d(b2).buffer:await deriveBits(p1);
+      var html=await openWithBits(bits);
+      remember(bits);show(html);return;
+    }catch(e){
+      if(isBadKey(e)){forget();err.textContent='저장된 입장 정보가 더 이상 유효하지 않습니다. 암호를 다시 입력해 주세요.';}
+      else{err.textContent='여는 중 문제가 발생했습니다. 새로고침 후 다시 시도해 주세요.';}
+      document.documentElement.className='';go.textContent='입장';go.disabled=false;
     }
   })();
   document.getElementById('f').addEventListener('submit',async function(e){
     e.preventDefault();
-    var err=document.getElementById('err'),go=document.getElementById('go');
     err.textContent='';go.textContent='확인 중…';go.disabled=true;
     try{
       var pw=document.getElementById('pw').value;
-      var html=await unlock(pw);
-      try{localStorage.setItem('cbt_gate_key',pw);}catch(_){}
-      document.open();document.write(html);document.close();
-    }catch(_){
-      err.textContent='암호가 올바르지 않습니다.';go.textContent='입장';go.disabled=false;
+      var bits=await deriveBits(pw);
+      var html=await openWithBits(bits);
+      remember(bits);show(html);
+    }catch(e2){
+      err.textContent=isBadKey(e2)?'암호가 올바르지 않습니다.':'여는 중 문제가 발생했습니다. 새로고침 후 다시 시도해 주세요.';
+      go.textContent='입장';go.disabled=false;
       document.getElementById('pw').select();
     }
   });
