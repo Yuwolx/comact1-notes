@@ -32,7 +32,7 @@ LOCK = ('<section class="subject" id="lock">'
         '<div class="subject-h ap">\U0001F512 제2·3과목 + 전체 문제은행은 구매 후 이용</div>'
         '<div class="topic"><div class="body">'
         '<p>이 <b>맛보기</b>에는 <b>제1과목 개념</b>과 <b>샘플 12문항</b>(엑셀·DB 표 문제 포함)만 담겨 있어요.</p>'
-        '<p><b>전체판 구성</b> — 3개 과목 개념집 + <b>355문항 모의고사</b>(자동 채점·합격 판정·오답 해설·응시 이력).</p>'
+        '<p><b>전체판 구성</b> — 3개 과목 개념집 + <b>484문항 모의고사</b>(자동 채점·합격 판정·오답 해설·응시 이력).</p>'
         '<p>구매·문의: <b>' + EMAIL + '</b></p>'
         '</div></div></section>')
 h = re.sub(r'<section class="subject s2" id="s2">.*?</section>', LOCK, h, count=1, flags=re.DOTALL)
@@ -49,12 +49,12 @@ ribbon_css = ('<style>#demoRibbon{background:linear-gradient(90deg,#5645d4,#7b3f
               '#demoRibbon a{color:#fff;font-weight:700;text-decoration:underline}</style>')
 h = h.replace('</head>', ribbon_css + '</head>', 1)
 ribbon = ('<div id="demoRibbon">\U0001F381 맛보기 버전 — 제1과목 개념 + 샘플 문항만 열려 있어요 · '
-          '전체(3과목 + 355문항)는 구매 시 제공 · 문의 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>')
+          '전체(3과목 + 484문항)는 구매 시 제공 · 문의 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>')
 h = h.replace('<header class="top">', ribbon + '<header class="top">', 1)
 
 # --- 모의고사 안내문을 맛보기용으로 ---
-h = h.replace('개념집 내용을 바탕으로 한 4지선다 문제를 실전처럼 풀고 채점받으세요. 응시 이력은 이 브라우저(localStorage)에만 저장되며 외부로 전송되지 않습니다. 시험 도중 새로고침하거나 창을 닫아도 이어서 풀 수 있습니다.',
-              '맛보기 샘플 12문항으로 채점·해설을 체험해 보세요. 전체판은 355문항으로 실전(과목당 20문항)까지 지원합니다. 응시 이력은 이 브라우저에만 저장됩니다.')
+h = h.replace('개념집 내용을 바탕으로 한 4지선다 문제를 실전처럼 풀고 채점받으세요. 틀린 문항은 자동으로 <b>오답노트</b>에 모이고, 맞힐 때까지 다시 풀 수 있습니다. 응시 이력은 이 브라우저(localStorage)에만 저장되며 외부로 전송되지 않습니다. 시험 도중 새로고침하거나 창을 닫아도 이어서 풀 수 있습니다.',
+              '맛보기 샘플 12문항으로 채점·해설·오답노트를 체험해 보세요. 전체판은 484문항으로 실전(과목당 20문항)까지 지원합니다. 응시 이력은 이 브라우저에만 저장됩니다.')
 
 os.makedirs(os.path.dirname(out), exist_ok=True)
 open(out, "w", encoding="utf-8").write(h)
