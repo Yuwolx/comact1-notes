@@ -11,18 +11,20 @@ h = open(app, encoding="utf-8").read()
 d = json.load(open(qbank, encoding="utf-8"))["questions"]
 
 # --- 샘플 12문항 (1과목4 / 2과목 3+표1 / 3과목 3+표1) ---
+# 앞쪽(기본 개념형) + 뒤쪽(신규 실전형) 반반으로 뽑아 난이도 스펙트럼을 보여준다.
 def pick(subj, n, kind):
-    r = []
+    pool = []
     for q in d:
         if q["subject"] != subj: continue
         has = ("grid" in q) or ("table" in q)
         if kind == "text" and has: continue
         if kind == "grid" and "grid" not in q: continue
         if kind == "table" and "table" not in q: continue
-        r.append(q)
-        if len(r) >= n: break
-    return r
-sample = pick(1,"4" and 4,"text") + pick(2,3,"text") + pick(2,1,"grid") + pick(3,3,"text") + pick(3,1,"table")
+        pool.append(q)
+    front = pool[:n // 2]
+    back = pool[len(pool) - (n - len(front)):]
+    return front + back
+sample = pick(1,4,"text") + pick(2,3,"text") + pick(2,1,"grid") + pick(3,3,"text") + pick(3,1,"table")
 sample_json = json.dumps({"questions": sample}, ensure_ascii=False)
 h = re.sub(r'var RAW = \{.*?\};(\s*\n\s*var QBANK)',
            lambda m: 'var RAW = ' + sample_json + ';' + m.group(1), h, count=1, flags=re.DOTALL)
