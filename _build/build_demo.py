@@ -10,7 +10,7 @@ app = sys.argv[1] if len(sys.argv) > 1 else "_source/app.html"
 qbank = sys.argv[2] if len(sys.argv) > 2 else "_source/qbank.json"
 out = sys.argv[3] if len(sys.argv) > 3 else "demo/index.html"
 EMAIL = "yuwolxx@gmail.com"
-TOTAL = "484문항"
+TOTAL = "659문항"
 
 h = open(app, encoding="utf-8").read()
 d = json.load(open(qbank, encoding="utf-8"))["questions"]
